@@ -1,12 +1,6 @@
-import { Check, Shield, Brain, Monitor, Lock, Rocket, Users, Crosshair, AlertTriangle } from "lucide-react";
+import { Shield, Monitor, Rocket, Users, Crosshair, AlertTriangle } from "lucide-react";
 import { STRIPE_FOUNDERS_LINK } from "@/lib/constants";
-import { type Language } from "@/lib/i18n";
-
-interface StackingProps {
-    lang?: Language;
-}
-
-export const Stacking = ({ lang = 'en' }: StackingProps) => {
+export const Stacking = () => {
     return (
         <section id="offer" className="py-24 bg-black relative overflow-hidden border-t border-white/5">
             {/* Background Ambience */}
