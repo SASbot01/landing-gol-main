@@ -32,7 +32,7 @@ export default function Landing() {
                 <ModelExplanation lang={lang} />
                 {/* Testimonials would go here */}
                 <Journey lang={lang} />
-                <Stacking lang={lang} />
+                <Stacking />
                 {/* Video Testimonials would go here */}
                 {/* Video Testimonials would go here */}
                 <Comparison lang={lang} />
