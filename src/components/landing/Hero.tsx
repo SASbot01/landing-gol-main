@@ -49,7 +49,7 @@ export const Hero = ({ lang = 'en' }: HeroProps) => {
                 <p className="font-mono text-gray-400 max-w-2xl text-xs md:text-sm lg:text-base leading-relaxed mb-8 uppercase tracking-wide" dangerouslySetInnerHTML={{ __html: t.hero.description }} />
 
                 <div className="flex flex-col md:flex-row items-center gap-4 z-30">
-                    <a href="#pricing">
+                    <a href="#offer">
                         <motion.button
                             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255, 153, 0, 0.5)" }}
                             whileTap={{ scale: 0.95 }}
