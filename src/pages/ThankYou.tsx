@@ -1,7 +1,20 @@
+import { useEffect } from "react";
 import { CheckCircle, Users, ArrowRight } from "lucide-react";
 import { DISCORD_COMMUNITY_LINK } from "@/lib/constants";
 
 export default function ThankYou() {
+    // Track Purchase event when page loads
+    useEffect(() => {
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+            (window as any).fbq('track', 'Purchase', {
+                value: 97.00,
+                currency: 'USD',
+                content_name: 'Game of Life - Founders Access',
+                content_type: 'product'
+            });
+        }
+    }, []);
+
     return (
         <div className="min-h-screen bg-black text-white font-sans flex items-center justify-center p-6 relative overflow-hidden">
             {/* Background Effects */}

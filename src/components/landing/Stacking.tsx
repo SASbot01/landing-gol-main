@@ -127,7 +127,23 @@ export const Stacking = () => {
                                 <div className="text-gray-500 font-mono text-xs uppercase">Lifetime Access • One-time Payment</div>
                             </div>
 
-                            <a href={STRIPE_FOUNDERS_LINK} target="_blank" rel="noopener noreferrer" className="block group">
+                            <a
+                                href={STRIPE_FOUNDERS_LINK}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block group"
+                                onClick={() => {
+                                    // Track InitiateCheckout event for Meta Pixel
+                                    if (typeof window !== 'undefined' && (window as any).fbq) {
+                                        (window as any).fbq('track', 'InitiateCheckout', {
+                                            value: 97.00,
+                                            currency: 'USD',
+                                            content_name: 'Game of Life - Founders Access',
+                                            content_category: 'Lifetime Access'
+                                        });
+                                    }
+                                }}
+                            >
                                 <button className="w-full py-5 bg-command-orange hover:bg-orange-500 text-black font-display font-bold text-xl uppercase tracking-widest transition-all shadow-[0_0_30px_rgba(255,153,0,0.3)] hover:shadow-[0_0_50px_rgba(255,153,0,0.5)] chamfered relative overflow-hidden">
                                     <span className="relative z-10">Become A Founder</span>
                                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
