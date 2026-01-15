@@ -34,11 +34,11 @@ export default function ThankYou() {
                         </div>
 
                         <h1 className="font-display text-4xl md:text-5xl text-white mb-4 tracking-tight">
-                            ¡Bienvenido a <span className="text-command-orange">Game of Life</span>!
+                            Welcome to <span className="text-command-orange">Game of Life</span>!
                         </h1>
 
                         <p className="font-mono text-gray-400 text-lg leading-relaxed">
-                            Gracias por unirte a los fundadores. Tu acceso de por vida ha sido activado.
+                            Thank you for joining the founders. Your lifetime access has been activated.
                         </p>
                     </div>
 
@@ -53,11 +53,11 @@ export default function ThankYou() {
                             </div>
                             <div className="flex-1">
                                 <h2 className="font-display text-xl text-white mb-2">
-                                    Únete a la Comunidad de Discord
+                                    Join the Discord Community
                                 </h2>
                                 <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                                    Nuestro equipo de Game of Life está disponible en Discord para ayudarte con cualquier duda o problema.
-                                    Conecta con otros fundadores y obtén soporte directo del equipo.
+                                    Our Game of Life team is available on Discord to help you with any questions or issues.
+                                    Connect with other founders and get direct support from the team.
                                 </p>
 
                                 <a
@@ -66,7 +66,7 @@ export default function ThankYou() {
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-command-orange hover:bg-orange-500 text-black font-display font-bold text-sm uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(255,153,0,0.3)] hover:shadow-[0_0_30px_rgba(255,153,0,0.5)] chamfered-sm group"
                                 >
-                                    <span>Unirse a Discord</span>
+                                    <span>Join Discord</span>
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </a>
                             </div>
@@ -78,14 +78,14 @@ export default function ThankYou() {
 
                     {/* Next Steps */}
                     <div className="space-y-4">
-                        <h3 className="font-display text-lg text-white mb-4">Próximos Pasos:</h3>
+                        <h3 className="font-display text-lg text-white mb-4">Next Steps:</h3>
                         <div className="space-y-3 font-mono text-sm">
                             <div className="flex items-start gap-3">
                                 <div className="w-6 h-6 rounded-full bg-command-orange/20 border border-command-orange/40 flex items-center justify-center flex-shrink-0 mt-0.5">
                                     <span className="text-command-orange text-xs">1</span>
                                 </div>
                                 <p className="text-gray-400">
-                                    Revisa tu email para recibir las credenciales de acceso a la plataforma
+                                    Check your email for access credentials to the platform
                                 </p>
                             </div>
                             <div className="flex items-start gap-3">
@@ -93,7 +93,7 @@ export default function ThankYou() {
                                     <span className="text-command-orange text-xs">2</span>
                                 </div>
                                 <p className="text-gray-400">
-                                    Únete a nuestra comunidad de Discord para soporte y actualizaciones
+                                    Join our Discord community for support and updates
                                 </p>
                             </div>
                             <div className="flex items-start gap-3">
@@ -101,7 +101,7 @@ export default function ThankYou() {
                                     <span className="text-command-orange text-xs">3</span>
                                 </div>
                                 <p className="text-gray-400">
-                                    Comienza a gamificar tu vida y alcanza tus objetivos
+                                    Start gamifying your life and achieve your goals
                                 </p>
                             </div>
                         </div>
@@ -111,7 +111,7 @@ export default function ThankYou() {
                 {/* Footer Note */}
                 <div className="text-center mt-8">
                     <p className="text-gray-500 text-sm font-mono">
-                        ¿Tienes preguntas? Estamos aquí para ayudarte en Discord
+                        Have questions? We're here to help you on Discord
                     </p>
                 </div>
             </div>
