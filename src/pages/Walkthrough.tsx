@@ -28,7 +28,7 @@ export default function Walkthrough() {
         }
     }, []);
 
-    // Show early CTA button after 30 seconds (only if popups haven't been exhausted)
+    // Show early CTA button after 10 seconds (only if popups haven't been exhausted)
     useEffect(() => {
         // Don't show early CTA if user already went through all popups
         const popup2Closed = localStorage.getItem('gol_popup2_closed');
@@ -38,7 +38,7 @@ export default function Walkthrough() {
             if (!popupActive && !allPopupsClosed) {
                 setShowEarlyCTA(true);
             }
-        }, 30000); // 30 seconds
+        }, 10000); // 10 seconds
 
         return () => clearTimeout(timer);
     }, [popupActive, allPopupsClosed]);

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, Shield, Zap, Activity, Gift, Clock, Users } from "lucide-react";
+import { Play, Shield, Zap, Activity, Clock, Users } from "lucide-react";
 import { type Language } from "@/lib/i18n";
 import { Link } from "react-router-dom";
 
