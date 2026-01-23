@@ -14,9 +14,9 @@ export default function Checkout() {
     const [lang, setLang] = useState<Language>('en');
 
     const priceParam = searchParams.get('price') || '97';
-    const paymentLinkUrl = priceParam === '68' ? PAYMENT_LINK_67 : PAYMENT_LINK_97;
-    const priceAmount = priceParam === '68' ? '$68' : '$97';
-    const isDiscounted = priceParam === '68';
+    const paymentLinkUrl = priceParam === '67' ? PAYMENT_LINK_67 : PAYMENT_LINK_97;
+    const priceAmount = priceParam === '67' ? '$67' : '$97';
+    const isDiscounted = priceParam === '67';
 
     const toggleLanguage = () => {
         setLang(prev => prev === 'en' ? 'es' : 'en');
@@ -26,7 +26,7 @@ export default function Checkout() {
         // Track Facebook Pixel event
         if (typeof window !== 'undefined' && (window as any).fbq) {
             (window as any).fbq('track', 'InitiateCheckout', {
-                value: priceParam === '68' ? 68.00 : 97.00,
+                value: priceParam === '67' ? 67.00 : 97.00,
                 currency: 'USD',
                 content_name: `GOL System - ${priceAmount}`,
                 content_category: 'Lifetime Access'
