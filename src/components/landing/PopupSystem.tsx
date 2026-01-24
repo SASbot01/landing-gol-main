@@ -25,23 +25,23 @@ export const PopupSystem = ({ lang = 'en' }: PopupSystemProps) => {
                 body: "You watched the briefing. Here's your reward.",
                 slots: "🔥 8/15 Founder Slots Available",
                 normalPrice: "Normal: $97/month",
-                currentPrice: "$67",
+                currentPrice: "$97",
                 priceLabel: "LIFETIME ACCESS",
-                subLabel: "30% OFF. One-time payment. Never pay again.",
+                subLabel: "One-time payment. Never pay again.",
                 timer: "Offer expires in:",
-                cta: "CLAIM 30% OFF LIFETIME",
+                cta: "CLAIM LIFETIME ACCESS",
                 dismiss: "No thanks, I'll pay monthly instead"
             },
             popup2: {
                 title: "🛑 WAIT — FINAL OFFER 🛑",
-                body: "Last chance. Lock in lifetime access now.",
+                body: "Last chance for 30% OFF. This won't show again.",
                 slots: "⚠️ Only 8 founder slots remain",
-                originalPrice: "$97/month",
-                currentPrice: "$97",
+                originalPrice: "$97",
+                currentPrice: "$67",
                 priceLabel: "LIFETIME ACCESS",
-                subLabel: "One-time payment. Final offer.",
+                subLabel: "30% OFF. One-time payment. Final offer.",
                 timer: "This disappears in:",
-                cta: "CLAIM LIFETIME ACCESS",
+                cta: "CLAIM 30% OFF LIFETIME",
                 dismiss: "Close"
             }
         },
@@ -60,10 +60,10 @@ export const PopupSystem = ({ lang = 'en' }: PopupSystemProps) => {
             },
             popup2: {
                 title: "🛑 ESPERA — OFERTA FINAL 🛑",
-                body: "Realmente te queremos dentro. 30% OFF de por vida.",
+                body: "Última oportunidad para 30% OFF. No aparecerá de nuevo.",
                 slots: "⚠️ Solo quedan 8 plazas de fundador",
                 originalPrice: "$97",
-                currentPrice: "$68",
+                currentPrice: "$67",
                 priceLabel: "ACCESO DE POR VIDA",
                 subLabel: "30% off. Pago único. Oferta final.",
                 timer: "Esto desaparece en:",
@@ -198,15 +198,15 @@ export const PopupSystem = ({ lang = 'en' }: PopupSystemProps) => {
         // Track event
         if (typeof window !== 'undefined' && (window as any).fbq) {
             (window as any).fbq('track', 'InitiateCheckout', {
-                value: popup === 1 ? 67.00 : 97.00,
+                value: popup === 1 ? 97.00 : 67.00,
                 currency: 'USD',
-                content_name: popup === 1 ? 'GOL - Lifetime $67 (30% off)' : 'GOL - Lifetime $97',
+                content_name: popup === 1 ? 'GOL - Lifetime $97' : 'GOL - Lifetime $67 (30% off)',
                 content_category: 'Lifetime Access'
             });
         }
 
         // Navigate to checkout with correct price
-        const priceParam = popup === 1 ? '67' : '97';
+        const priceParam = popup === 1 ? '97' : '67';
         navigate(`/checkout?price=${priceParam}`);
 
         if (popup === 1) {

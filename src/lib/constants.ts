@@ -14,7 +14,7 @@ export const STRIPE_LIFETIME_LINK = 'https://buy.stripe.com/14A28qauL6d789f3mU5k
 export const STRIPE_FOUNDERS_LINK = 'https://buy.stripe.com/00w00i46nfNH9dj2iQ5kk04'; // $97 lifetime - FOUNDERS
 
 // Community Links
-export const DISCORD_COMMUNITY_LINK = 'https://discord.gg/bc76ZGWEB9';
+export const DISCORD_COMMUNITY_LINK = 'https://discord.gg/9c9mMu5Sxf';
 
 export const ROUTES = {
     HOME: '/',
