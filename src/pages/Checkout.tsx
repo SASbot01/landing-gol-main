@@ -15,9 +15,9 @@ import { type Language } from "@/lib/i18n";
 // Load Stripe
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
-// Price IDs
-const PRICE_97 = import.meta.env.VITE_STRIPE_PRICE_97;
-const PRICE_67 = import.meta.env.VITE_STRIPE_PRICE_67;
+// Price IDs - hardcoded for consistency with backend
+const PRICE_97 = 'price_1SpoC3Cl8P39vjkQIzFKrMAa';
+const PRICE_67 = 'price_1SsjvBCl8P39vjkQvK5owi9z';
 
 // Checkout Form Component
 function CheckoutForm({ priceAmount, lang }: { priceAmount: string; lang: Language }) {
