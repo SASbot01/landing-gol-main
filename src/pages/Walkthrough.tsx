@@ -208,7 +208,7 @@ export default function Walkthrough() {
                     >
                         <div className="relative aspect-video bg-zinc-900 border border-white/10 chamfered overflow-hidden group">
                             <iframe
-                                src="https://www.loom.com/embed/0af0333db96f43fd8ccd5b9638fc7a12"
+                                src="https://www.loom.com/embed/d388117705f34663adb2c3049d3f5833"
                                 frameBorder="0"
                                 allowFullScreen
                                 className="absolute inset-0 w-full h-full"

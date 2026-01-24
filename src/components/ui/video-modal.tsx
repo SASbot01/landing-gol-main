@@ -8,7 +8,7 @@ interface VideoModalProps {
     videoUrl?: string; // Optional: Youtube URL or file path
 }
 
-export const VideoModal = ({ isOpen, onClose, videoUrl = "https://www.loom.com/embed/0af0333db96f43fd8ccd5b9638fc7a12" }: VideoModalProps) => {
+export const VideoModal = ({ isOpen, onClose, videoUrl = "https://www.loom.com/embed/d388117705f34663adb2c3049d3f5833" }: VideoModalProps) => {
     // Backdrop constraints
     const backdropRef = useRef<HTMLDivElement>(null);
 
