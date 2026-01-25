@@ -28,6 +28,17 @@ export default function Walkthrough() {
         }
     }, []);
 
+    // Track ViewContent when video page loads
+    useEffect(() => {
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+            (window as any).fbq('track', 'ViewContent', {
+                content_name: 'GOL System Briefing Video',
+                content_category: 'Video',
+                content_type: 'video'
+            });
+        }
+    }, []);
+
     // Show early CTA button after 10 seconds (only if popups haven't been exhausted)
     useEffect(() => {
         // Don't show early CTA if user already went through all popups
