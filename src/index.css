@@ -81,8 +81,8 @@
     height: 100vh;
     height: 100dvh; /* Dynamic viewport height for mobile */
     background-image:
-      linear-gradient(rgba(255, 184, 0, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 184, 0, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(255, 184, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 184, 0, 0.05) 1px, transparent 1px);
     background-size: 60px 60px;
     background-repeat: repeat;
     background-position: 0 0;
@@ -94,7 +94,7 @@
     backface-visibility: hidden;
   }
 
-  /* Background gradient orbs - uniform distribution */
+  /* Background gradient orbs - uniform distribution with more light */
   .landing-container::after {
     content: '';
     position: fixed;
@@ -105,10 +105,11 @@
     height: 100vh;
     height: 100dvh;
     background:
-      radial-gradient(ellipse 100% 80% at 50% 0%, rgba(255, 184, 0, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse 100% 80% at 50% 100%, rgba(255, 184, 0, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse 80% 60% at 0% 50%, rgba(255, 153, 0, 0.04) 0%, transparent 50%),
-      radial-gradient(ellipse 80% 60% at 100% 50%, rgba(255, 153, 0, 0.04) 0%, transparent 50%);
+      radial-gradient(ellipse 120% 100% at 50% 0%, rgba(255, 184, 0, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 120% 100% at 50% 100%, rgba(255, 184, 0, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 80% at 0% 50%, rgba(255, 153, 0, 0.10) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 80% at 100% 50%, rgba(255, 153, 0, 0.10) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 80% at 50% 50%, rgba(255, 184, 0, 0.08) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
     -webkit-transform: translateZ(0);
