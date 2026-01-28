@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useCountdown } from "@/hooks/useCountdown";
@@ -74,36 +73,24 @@ export const HeroSection = () => {
                     <span className="text-white">execute strategy</span>.
                 </motion.p>
 
-                {/* CTA Buttons */}
+                {/* CTA Button */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.6 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                    className="flex items-center justify-center"
                 >
                     {/* Primary CTA - Dynamic URL based on countdown */}
                     <Link to={checkoutUrl}>
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="group relative px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black font-mono font-semibold text-sm tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_30px_rgba(255,184,0,0.3)] hover:shadow-[0_0_40px_rgba(255,184,0,0.5)]"
+                            className="group relative px-10 py-4 bg-amber-500 hover:bg-amber-400 text-black font-mono font-semibold text-sm tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_30px_rgba(255,184,0,0.3)] hover:shadow-[0_0_40px_rgba(255,184,0,0.5)]"
                         >
                             <span className="flex items-center gap-2">
                                 <span className="text-amber-900">&gt;</span>
                                 INITIALIZE PROTOCOL
                             </span>
-                        </motion.button>
-                    </Link>
-
-                    {/* Secondary CTA */}
-                    <Link to="/walkthrough">
-                        <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="group flex items-center gap-2 px-8 py-4 bg-transparent border border-[#333] hover:border-amber-500/50 text-white font-mono font-medium text-sm tracking-wider rounded-lg transition-all duration-300"
-                        >
-                            <Play className="w-4 h-4 text-amber-500" />
-                            SYSTEM BRIEFING
                         </motion.button>
                     </Link>
                 </motion.div>
