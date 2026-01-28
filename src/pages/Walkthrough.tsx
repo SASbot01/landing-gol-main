@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Play, Lock, CheckCircle, Gift, ArrowRight, AlertTriangle, Zap } from "lucide-react";
+import { Play, CheckCircle, Gift, ArrowRight, AlertTriangle, Zap } from "lucide-react";
 import { type Language } from "@/lib/i18n";
 import { SystemHeader } from "@/components/landing/SystemHeader";
 import { Footer } from "@/components/landing/Footer";
@@ -309,65 +309,22 @@ export default function Walkthrough() {
                         transition={{ delay: 0.6 }}
                         className="max-w-xl mx-auto text-center"
                     >
-                        {allPopupsClosed ? (
-                            /* Last Chance Section - after both popups closed */
-                            <div className="bg-zinc-800/50 border-2 border-red-500/30 p-8 chamfered shadow-[0_0_40px_rgba(239,68,68,0.1)]">
-                                <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                                <h3 className="font-display text-2xl text-white uppercase mb-2">
-                                    {t.valueStack.lastChance.title}
-                                </h3>
-                                <p className="font-mono text-lg text-red-400 mb-2">
-                                    {t.valueStack.lastChance.subtitle}
-                                </p>
-                                <p className="font-mono text-sm text-gray-400 mb-6">
-                                    {t.valueStack.lastChance.body}
-                                </p>
-
-                                {/* Price */}
-                                <div className="flex items-center justify-center gap-2 mb-2">
-                                    <Zap className="w-6 h-6 text-command-orange" />
-                                    <span className="text-5xl font-display text-white">{t.valueStack.lastChance.price}</span>
-                                </div>
-                                <div className="text-command-orange font-mono text-lg uppercase tracking-widest mb-4">
-                                    {t.valueStack.lastChance.priceLabel}
-                                </div>
-
-                                {/* Scarcity */}
-                                <p className="font-mono text-xs text-red-400 mb-2">
-                                    {t.valueStack.lastChance.slots}
-                                </p>
-                                <p className="font-mono text-xs text-gray-500 mb-6">
-                                    {t.valueStack.lastChance.warning}
-                                </p>
-
-                                {/* CTA */}
+                        {/* CTA Section - same style as Hero */}
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            {/* Primary CTA */}
+                            <Link to="/checkout">
                                 <motion.button
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    onClick={handleLastChanceCTA}
-                                    className="w-full py-4 bg-command-orange hover:bg-orange-500 text-black font-display font-bold text-lg uppercase tracking-widest transition-all chamfered shadow-[0_0_30px_rgba(255,153,0,0.4)]"
+                                    className="group relative px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black font-mono font-semibold text-sm tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_30px_rgba(255,184,0,0.3)] hover:shadow-[0_0_40px_rgba(255,184,0,0.5)]"
                                 >
-                                    {t.valueStack.lastChance.cta}
+                                    <span className="flex items-center gap-2">
+                                        <span className="text-amber-900">&gt;</span>
+                                        INITIALIZE PROTOCOL
+                                    </span>
                                 </motion.button>
-                            </div>
-                        ) : (
-                            /* Unlock Section - before popups shown */
-                            <div className="bg-zinc-800/50 border border-command-orange/20 p-8 chamfered">
-                                <Lock className="w-12 h-12 text-command-orange mx-auto mb-4" />
-                                <h3 className="font-display text-xl text-white uppercase mb-2">
-                                    {t.valueStack.unlock.title}
-                                </h3>
-                                <p className="font-mono text-sm text-gray-400 mb-4">
-                                    {t.valueStack.unlock.subtitle}
-                                </p>
-                                <p className="font-mono text-xs text-gray-500 mb-2">
-                                    {t.valueStack.unlock.normalPrice}
-                                </p>
-                                <p className="font-mono text-xs text-command-orange animate-pulse">
-                                    {t.valueStack.unlock.hint}
-                                </p>
-                            </div>
-                        )}
+                            </Link>
+                        </div>
                     </motion.div>
                 </div>
             </main>
