@@ -40,7 +40,7 @@ const row1 = testimonials.slice(0, 4);
 const row2 = testimonials.slice(4, 8);
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
-    <div className="card-glow p-4 md:p-6 min-w-[260px] md:min-w-[380px] mx-2 md:mx-3 flex-shrink-0">
+    <div className="card-glow p-3 md:p-4 min-w-[180px] md:min-w-[265px] mx-2 md:mx-2 flex-shrink-0">
         {/* Quote icon */}
         <div className="text-amber-500/30 text-2xl md:text-3xl font-serif mb-2 md:mb-3">"</div>
 
@@ -94,13 +94,13 @@ export const SocialProofSection = () => {
                     <motion.div
                         className="flex"
                         animate={{
-                            x: [0, -1120],
+                            x: [0, -780],
                         }}
                         transition={{
                             x: {
                                 repeat: Infinity,
                                 repeatType: "loop",
-                                duration: 25,
+                                duration: 20,
                                 ease: "linear",
                             },
                         }}
@@ -119,15 +119,15 @@ export const SocialProofSection = () => {
 
                     <motion.div
                         className="flex"
-                        initial={{ x: -1120 }}
+                        initial={{ x: -780 }}
                         animate={{
-                            x: [-1120, 0],
+                            x: [-780, 0],
                         }}
                         transition={{
                             x: {
                                 repeat: Infinity,
                                 repeatType: "loop",
-                                duration: 25,
+                                duration: 20,
                                 ease: "linear",
                             },
                         }}
