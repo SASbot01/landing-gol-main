@@ -9,9 +9,6 @@ export const HeroSection = () => {
 
     return (
         <section className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 py-16 overflow-hidden">
-            {/* Ambient glow - transparent to show grid background */}
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-amber-500/10 blur-[150px] rounded-full pointer-events-none" />
-
             <div className="relative z-10 max-w-4xl mx-auto text-center">
                 {/* Spinning Logo with hover effect */}
                 <motion.div

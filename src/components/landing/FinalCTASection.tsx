@@ -13,9 +13,6 @@ export const FinalCTASection = () => {
 
     return (
         <section className="relative py-12 md:py-16 px-6">
-            {/* Background glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-amber-500/10 blur-[150px] rounded-full pointer-events-none" />
-
             <div className="max-w-xl mx-auto relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
