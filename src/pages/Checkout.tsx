@@ -9,8 +9,6 @@ import {
 import { useSearchParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Shield, Lock, Zap, CheckCircle, Gift, Clock, Users, Loader2 } from "lucide-react";
-import { SystemHeader } from "@/components/landing/SystemHeader";
-import { type Language } from "@/lib/i18n";
 
 // Load Stripe
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
@@ -20,26 +18,11 @@ const PRICE_97 = 'price_1SpoC3Cl8P39vjkQIzFKrMAa';
 const PRICE_67 = 'price_1SsjvBCl8P39vjkQvK5owi9z';
 
 // Checkout Form Component
-function CheckoutForm({ priceAmount, lang }: { priceAmount: string; lang: Language }) {
+function CheckoutForm({ priceAmount }: { priceAmount: string }) {
     const stripe = useStripe();
     const elements = useElements();
     const [isProcessing, setIsProcessing] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-    const copy = {
-        en: {
-            button: "COMPLETE PAYMENT",
-            processing: "Processing...",
-            error: "Payment failed. Please try again.",
-        },
-        es: {
-            button: "COMPLETAR PAGO",
-            processing: "Procesando...",
-            error: "Pago fallido. Por favor intenta de nuevo.",
-        }
-    };
-
-    const t = copy[lang];
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -68,7 +51,7 @@ function CheckoutForm({ priceAmount, lang }: { priceAmount: string; lang: Langua
         });
 
         if (error) {
-            setErrorMessage(error.message || t.error);
+            setErrorMessage(error.message || "Payment failed. Please try again.");
             setIsProcessing(false);
         }
     };
@@ -82,7 +65,7 @@ function CheckoutForm({ priceAmount, lang }: { priceAmount: string; lang: Langua
             />
 
             {errorMessage && (
-                <div className="bg-red-900/20 border border-red-500/30 text-red-400 px-4 py-3 rounded font-mono text-sm">
+                <div className="bg-red-900/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg font-mono text-sm">
                     {errorMessage}
                 </div>
             )}
@@ -92,15 +75,15 @@ function CheckoutForm({ priceAmount, lang }: { priceAmount: string; lang: Langua
                 disabled={!stripe || isProcessing}
                 whileHover={{ scale: isProcessing ? 1 : 1.02 }}
                 whileTap={{ scale: isProcessing ? 1 : 0.98 }}
-                className="w-full py-4 bg-command-orange hover:bg-orange-500 text-black font-display font-bold text-lg uppercase tracking-widest transition-all chamfered shadow-[0_0_30px_rgba(255,153,0,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-black font-mono font-bold text-lg uppercase tracking-wider rounded-xl transition-all shadow-[0_0_30px_rgba(255,184,0,0.4)] hover:shadow-[0_0_50px_rgba(255,184,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
                 {isProcessing ? (
                     <>
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        {t.processing}
+                        Processing...
                     </>
                 ) : (
-                    t.button
+                    "COMPLETE PAYMENT"
                 )}
             </motion.button>
         </form>
@@ -109,7 +92,6 @@ function CheckoutForm({ priceAmount, lang }: { priceAmount: string; lang: Langua
 
 export default function Checkout() {
     const [searchParams] = useSearchParams();
-    const [lang, setLang] = useState<Language>('en');
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -117,10 +99,6 @@ export default function Checkout() {
     const priceId = priceParam === '67' ? PRICE_67 : PRICE_97;
     const priceAmount = priceParam === '67' ? '$67' : '$97';
     const isDiscounted = priceParam === '67';
-
-    const toggleLanguage = () => {
-        setLang(prev => prev === 'en' ? 'es' : 'en');
-    };
 
     // Create Payment Intent on mount
     useEffect(() => {
@@ -158,172 +136,147 @@ export default function Checkout() {
         createPaymentIntent();
     }, [priceId, priceParam, priceAmount]);
 
-    const copy = {
-        en: {
-            back: "Back to briefing",
-            title: "COMPLETE YOUR ORDER",
-            subtitle: "Secure checkout powered by Stripe",
-            price: priceAmount,
-            priceLabel: "LIFETIME ACCESS",
-            originalPrice: "$97",
-            discountBadge: "30% OFF",
-            guarantee: "14-Day Money-Back Guarantee",
-            secure: "256-bit SSL Encryption",
-            instant: "Instant Access After Payment",
-            slots: "8/15 Founder Slots Remaining",
-            valueStack: {
-                title: "WHAT YOU'RE GETTING:",
-                items: [
-                    { name: "GOL // SYSTEM Platform", value: "$497" },
-                    { name: "Onboarding Protocol", value: "$97" },
-                    { name: "Wealth Defense Blueprint", value: "$147" },
-                    { name: "Commander's Playbook", value: "$97" },
-                ],
-                bonuses: [
-                    "Private Founders Community",
-                    "Monthly Strategy Calls",
-                    "Priority Feature Requests",
-                ],
-                total: "Total Value: $1,332+"
-            },
-            urgency: "⏱ This offer expires when founder slots fill",
-            loading: "Loading secure checkout..."
-        },
-        es: {
-            back: "Volver al briefing",
-            title: "COMPLETA TU ORDEN",
-            subtitle: "Checkout seguro powered by Stripe",
-            price: priceAmount,
-            priceLabel: "ACCESO DE POR VIDA",
-            originalPrice: "$97",
-            discountBadge: "30% OFF",
-            guarantee: "Garantía de 14 Días",
-            secure: "Encriptación SSL 256-bit",
-            instant: "Acceso Instantáneo",
-            slots: "8/15 Plazas Restantes",
-            valueStack: {
-                title: "LO QUE OBTIENES:",
-                items: [
-                    { name: "Plataforma GOL // SYSTEM", value: "$497" },
-                    { name: "Protocolo de Onboarding", value: "$97" },
-                    { name: "Blueprint Defensa de Riqueza", value: "$147" },
-                    { name: "Playbook del Comandante", value: "$97" },
-                ],
-                bonuses: [
-                    "Comunidad Privada de Fundadores",
-                    "Llamadas Mensuales de Estrategia",
-                    "Solicitudes Prioritarias",
-                ],
-                total: "Valor Total: $1,332+"
-            },
-            urgency: "⏱ Esta oferta expira cuando se llenen las plazas",
-            loading: "Cargando checkout seguro..."
-        }
-    };
+    const valueStackItems = [
+        { name: "GOL // SYSTEM Platform", value: "$497" },
+        { name: "Onboarding Protocol", value: "$97" },
+        { name: "Wealth Defense Blueprint", value: "$147" },
+        { name: "Commander's Playbook", value: "$97" },
+    ];
 
-    const t = copy[lang];
+    const bonuses = [
+        "Private Founders Community",
+        "Monthly Strategy Calls",
+        "Priority Feature Requests",
+    ];
 
     const appearance = {
         theme: 'night' as const,
         variables: {
-            colorPrimary: '#ff9900',
-            colorBackground: '#18181b',
+            colorPrimary: '#f59e0b',
+            colorBackground: '#0a0a0a',
             colorText: '#ffffff',
             colorDanger: '#ef4444',
             fontFamily: 'JetBrains Mono, monospace',
             spacingUnit: '4px',
-            borderRadius: '2px',
+            borderRadius: '8px',
         },
         rules: {
             '.Input': {
-                border: '1px solid rgba(255, 153, 0, 0.3)',
-                backgroundColor: '#09090b',
+                border: '1px solid #1a1a1a',
+                backgroundColor: '#050505',
                 color: '#ffffff',
             },
             '.Input:focus': {
-                border: '1px solid rgba(255, 153, 0, 0.6)',
-                boxShadow: '0 0 0 1px rgba(255, 153, 0, 0.3)',
+                border: '1px solid rgba(245, 158, 11, 0.5)',
+                boxShadow: '0 0 0 2px rgba(245, 158, 11, 0.2)',
             },
             '.Label': {
-                color: '#a1a1aa',
+                color: '#9ca3af',
                 fontSize: '12px',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
+            },
+            '.Tab': {
+                border: '1px solid #1a1a1a',
+                backgroundColor: '#0a0a0a',
+            },
+            '.Tab--selected': {
+                borderColor: '#f59e0b',
+                backgroundColor: '#0a0a0a',
             },
         },
     };
 
     return (
-        <div className="min-h-screen bg-black text-white font-sans">
-            <SystemHeader lang={lang} toggleLanguage={toggleLanguage} />
-
-            <main className="pt-24 md:pt-32 pb-12 md:pb-16">
-                <div className="container mx-auto px-4 md:px-6">
-                    {/* Back link */}
-                    <Link
-                        to="/walkthrough"
-                        className="inline-flex items-center gap-2 text-gray-400 hover:text-white font-mono text-sm mb-8 transition-colors"
-                    >
-                        <ArrowLeft className="w-4 h-4" />
-                        {t.back}
+        <div className="landing-container min-h-screen text-white font-sans overflow-x-hidden relative">
+            {/* Fixed Header */}
+            <header className="fixed top-0 w-full z-50 bg-[#050505]/90 backdrop-blur-md border-b border-[#1a1a1a]">
+                <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+                    {/* Logo */}
+                    <Link to="/" className="flex items-center gap-3">
+                        <div className="w-2.5 h-2.5 bg-amber-500 rounded-full" />
+                        <span className="font-mono text-sm text-white tracking-widest">
+                            GOL // SYSTEM
+                        </span>
                     </Link>
 
-                    <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-start">
+                    {/* Back */}
+                    <Link
+                        to="/"
+                        className="flex items-center gap-2 text-gray-400 hover:text-amber-500 font-mono text-xs transition-colors"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        BACK
+                    </Link>
+                </div>
+            </header>
+
+            <main className="pt-28 md:pt-32 pb-16 px-4 md:px-6">
+                <div className="max-w-5xl mx-auto">
+                    {/* Title */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-center mb-10"
+                    >
+                        <h1 className="text-3xl md:text-4xl font-mono font-bold text-white mb-2">
+                            Complete Your <span className="text-amber-500">Order</span>
+                        </h1>
+                        <p className="text-gray-400 font-mono text-sm">
+                            Secure checkout powered by Stripe
+                        </p>
+                    </motion.div>
+
+                    <div className="grid lg:grid-cols-2 gap-8 items-start">
                         {/* Left: Order Summary */}
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
+                            className="order-2 lg:order-1"
                         >
-                            <h1 className="font-display text-3xl md:text-4xl text-white uppercase mb-2">
-                                {t.title}
-                            </h1>
-                            <p className="font-mono text-gray-400 mb-6">
-                                {t.subtitle}
-                            </p>
-
                             {/* Scarcity Badge */}
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-600/20 border border-red-500/30 text-red-400 font-mono text-sm mb-6">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/30 text-red-400 font-mono text-xs rounded-full mb-6">
                                 <Users className="w-4 h-4" />
-                                {t.slots}
+                                8/15 Founder Slots Remaining
                             </div>
 
                             {/* Price Display */}
-                            <div className="bg-zinc-900/50 border border-command-orange/30 p-6 chamfered mb-6">
+                            <div className="card-glow p-6 mb-6">
                                 <div className="flex items-center justify-between mb-4">
                                     <span className="font-mono text-gray-300">GOL // SYSTEM</span>
                                     <div className="text-right">
                                         <div className="flex items-center gap-3">
                                             {isDiscounted && (
                                                 <>
-                                                    <span className="text-gray-500 line-through font-mono">{t.originalPrice}</span>
-                                                    <span className="px-2 py-1 bg-red-600 text-white text-xs font-mono">{t.discountBadge}</span>
+                                                    <span className="text-gray-500 line-through font-mono">$97</span>
+                                                    <span className="px-2 py-1 bg-red-600 text-white text-xs font-mono rounded">-30%</span>
                                                 </>
                                             )}
                                             <div className="flex items-center gap-1">
-                                                <Zap className="w-5 h-5 text-command-orange" />
-                                                <span className="text-3xl font-display text-white">{t.price}</span>
+                                                <Zap className="w-5 h-5 text-amber-500" />
+                                                <span className="text-3xl font-mono font-bold text-white">{priceAmount}</span>
                                             </div>
                                         </div>
-                                        <span className="font-mono text-xs text-command-orange uppercase">
-                                            {t.priceLabel}
+                                        <span className="font-mono text-xs text-amber-500 uppercase">
+                                            LIFETIME ACCESS
                                         </span>
                                     </div>
                                 </div>
-                                <div className="border-t border-white/10 pt-4">
+                                <div className="border-t border-[#1a1a1a] pt-4">
                                     <div className="flex justify-between font-mono text-sm">
                                         <span className="text-gray-400">Total</span>
-                                        <span className="text-white font-bold">{t.price} USD</span>
+                                        <span className="text-white font-bold">{priceAmount} USD</span>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Value Stack */}
-                            <div className="bg-zinc-900/30 border border-white/10 p-5 chamfered mb-6">
-                                <h3 className="font-mono text-xs text-command-orange uppercase tracking-widest mb-4 font-bold">
-                                    {t.valueStack.title}
+                            <div className="card-glow p-5 mb-6">
+                                <h3 className="font-mono text-xs text-amber-500 uppercase tracking-wider mb-4 font-bold">
+                                    What you're getting:
                                 </h3>
                                 <div className="space-y-2 mb-4">
-                                    {t.valueStack.items.map((item, i) => (
+                                    {valueStackItems.map((item, i) => (
                                         <div key={i} className="flex justify-between items-center gap-2">
                                             <div className="flex items-center gap-2 min-w-0">
                                                 <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
@@ -333,20 +286,20 @@ export default function Checkout() {
                                         </div>
                                     ))}
                                 </div>
-                                <div className="border-t border-command-orange/20 pt-3">
+                                <div className="border-t border-amber-500/20 pt-3">
                                     <div className="flex items-center gap-2 mb-2">
-                                        <Gift className="w-4 h-4 text-command-orange" />
-                                        <span className="font-mono text-xs text-command-orange uppercase">Founder Bonuses</span>
+                                        <Gift className="w-4 h-4 text-amber-500" />
+                                        <span className="font-mono text-xs text-amber-500 uppercase">Founder Bonuses</span>
                                     </div>
-                                    {t.valueStack.bonuses.map((bonus, i) => (
+                                    {bonuses.map((bonus, i) => (
                                         <div key={i} className="flex items-center gap-2 ml-6">
-                                            <span className="text-command-orange">+</span>
+                                            <span className="text-amber-500">+</span>
                                             <span className="font-mono text-xs text-gray-400">{bonus}</span>
                                         </div>
                                     ))}
                                 </div>
-                                <div className="text-center mt-4 pt-3 border-t border-white/5">
-                                    <span className="font-mono text-sm text-gray-400 line-through">{t.valueStack.total}</span>
+                                <div className="text-center mt-4 pt-3 border-t border-[#1a1a1a]">
+                                    <span className="font-mono text-sm text-gray-500 line-through">Total Value: $1,332+</span>
                                 </div>
                             </div>
 
@@ -354,22 +307,22 @@ export default function Checkout() {
                             <div className="space-y-3 mb-6">
                                 <div className="flex items-center gap-3 text-gray-400 font-mono text-sm">
                                     <Shield className="w-5 h-5 text-green-500" />
-                                    {t.guarantee}
+                                    14-Day Money-Back Guarantee
                                 </div>
                                 <div className="flex items-center gap-3 text-gray-400 font-mono text-sm">
                                     <Lock className="w-5 h-5 text-green-500" />
-                                    {t.secure}
+                                    256-bit SSL Encryption
                                 </div>
                                 <div className="flex items-center gap-3 text-gray-400 font-mono text-sm">
-                                    <Zap className="w-5 h-5 text-command-orange" />
-                                    {t.instant}
+                                    <Zap className="w-5 h-5 text-amber-500" />
+                                    Instant Access After Payment
                                 </div>
                             </div>
 
                             {/* Urgency */}
                             <div className="flex items-center gap-2 text-red-400 font-mono text-xs">
                                 <Clock className="w-4 h-4" />
-                                {t.urgency}
+                                This offer expires when founder slots fill
                             </div>
                         </motion.div>
 
@@ -378,16 +331,21 @@ export default function Checkout() {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="bg-zinc-900/50 border border-white/10 p-6 md:p-8 chamfered"
+                            className="card-glow p-6 md:p-8 order-1 lg:order-2"
                         >
+                            <h2 className="font-mono text-lg text-white mb-6 flex items-center gap-2">
+                                <Lock className="w-5 h-5 text-amber-500" />
+                                Payment Details
+                            </h2>
+
                             {loading || !clientSecret ? (
-                                <div className="flex flex-col items-center justify-center py-20">
-                                    <Loader2 className="w-12 h-12 text-command-orange animate-spin mb-4" />
-                                    <p className="font-mono text-gray-400 text-sm">{t.loading}</p>
+                                <div className="flex flex-col items-center justify-center py-16">
+                                    <Loader2 className="w-12 h-12 text-amber-500 animate-spin mb-4" />
+                                    <p className="font-mono text-gray-400 text-sm">Loading secure checkout...</p>
                                 </div>
                             ) : (
                                 <Elements stripe={stripePromise} options={{ clientSecret, appearance }}>
-                                    <CheckoutForm priceAmount={priceAmount} lang={lang} />
+                                    <CheckoutForm priceAmount={priceAmount} />
                                 </Elements>
                             )}
                         </motion.div>

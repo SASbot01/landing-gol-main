@@ -1,32 +1,49 @@
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export const HeroSection = () => {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
         <section className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 py-16 overflow-hidden">
             {/* Ambient glow - transparent to show grid background */}
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-amber-500/10 blur-[150px] rounded-full pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl mx-auto text-center">
-                {/* Spinning Logo */}
+                {/* Spinning Logo with hover effect */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
                     className="inline-flex items-center justify-center mb-8"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                 >
-                    <motion.img
-                        src="/logo-gol.png"
-                        alt="GOL Logo"
-                        className="w-20 h-20 md:w-24 md:h-24"
-                        animate={{ rotate: 360 }}
-                        transition={{
-                            duration: 20,
-                            repeat: Infinity,
-                            ease: "linear"
-                        }}
-                    />
+                    <div
+                        className={`relative p-2 rounded-full transition-all duration-300 ${
+                            isHovered
+                                ? 'shadow-[0_0_40px_rgba(255,184,0,0.6),0_0_80px_rgba(255,184,0,0.3)]'
+                                : ''
+                        }`}
+                    >
+                        {/* Glow ring on hover */}
+                        {isHovered && (
+                            <div className="absolute inset-0 rounded-full bg-amber-500/20 animate-pulse" />
+                        )}
+                        <motion.img
+                            src="/logo-gol.png"
+                            alt="GOL Logo"
+                            className="w-20 h-20 md:w-24 md:h-24 relative z-10 cursor-pointer"
+                            animate={{ rotate: 360 }}
+                            transition={{
+                                duration: isHovered ? 5 : 20, // 4x faster on hover (20/4 = 5)
+                                repeat: Infinity,
+                                ease: "linear"
+                            }}
+                        />
+                    </div>
                 </motion.div>
 
                 {/* Main Headline */}
