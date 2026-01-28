@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Play, CheckCircle, Gift, ArrowRight, AlertTriangle, Zap } from "lucide-react";
+import { Play, CheckCircle, Gift, ArrowRight } from "lucide-react";
 import { type Language } from "@/lib/i18n";
 import { SystemHeader } from "@/components/landing/SystemHeader";
 import { Footer } from "@/components/landing/Footer";
 import { PopupSystem } from "@/components/landing/PopupSystem";
 
 export default function Walkthrough() {
-    const navigate = useNavigate();
     const [lang, setLang] = useState<Language>('en');
     const [showEarlyCTA, setShowEarlyCTA] = useState(false);
     const [popupActive, setPopupActive] = useState(false);
@@ -96,19 +95,6 @@ export default function Walkthrough() {
 
         // Trigger popup via custom event (but don't clear localStorage)
         window.dispatchEvent(new CustomEvent('triggerPopup'));
-    };
-
-    const handleLastChanceCTA = () => {
-        // Track event
-        if (typeof window !== 'undefined' && (window as any).fbq) {
-            (window as any).fbq('track', 'InitiateCheckout', {
-                value: 97.00,
-                currency: 'USD',
-                content_name: 'GOL - Last Opportunity $97',
-                content_category: 'Lifetime Access'
-            });
-        }
-        navigate('/checkout?price=97');
     };
 
     const copy = {

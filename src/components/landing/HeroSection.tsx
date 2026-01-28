@@ -9,18 +9,24 @@ export const HeroSection = () => {
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-amber-500/10 blur-[150px] rounded-full pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl mx-auto text-center">
-                {/* Status Badge */}
+                {/* Spinning Logo */}
                 <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="inline-flex items-center gap-2 mb-8"
+                    className="inline-flex items-center justify-center mb-8"
                 >
-                    <span className="flex items-center gap-2 px-4 py-2 bg-[#0a0a0a] border border-[#1a1a1a] rounded-full text-sm font-mono">
-                        <span className="w-2 h-2 bg-green-500 rounded-full status-dot" />
-                        <span className="text-gray-400">SYSTEM STATUS:</span>
-                        <span className="text-green-500">ONLINE</span>
-                    </span>
+                    <motion.img
+                        src="/logo-gol.png"
+                        alt="GOL Logo"
+                        className="w-20 h-20 md:w-24 md:h-24"
+                        animate={{ rotate: 360 }}
+                        transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            ease: "linear"
+                        }}
+                    />
                 </motion.div>
 
                 {/* Main Headline */}
