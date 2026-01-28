@@ -2,9 +2,11 @@ import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useCountdown } from "@/hooks/useCountdown";
 
 export const HeroSection = () => {
     const [isHovered, setIsHovered] = useState(false);
+    const { checkoutUrl } = useCountdown();
 
     return (
         <section className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 py-16 overflow-hidden">
@@ -79,8 +81,8 @@ export const HeroSection = () => {
                     transition={{ delay: 0.3, duration: 0.6 }}
                     className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
-                    {/* Primary CTA */}
-                    <Link to="/checkout">
+                    {/* Primary CTA - Dynamic URL based on countdown */}
+                    <Link to={checkoutUrl}>
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}

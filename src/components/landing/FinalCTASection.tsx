@@ -1,57 +1,15 @@
 import { motion } from "framer-motion";
 import { Check, Users, Video, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useCountdown } from "@/hooks/useCountdown";
 
 const bonuses = [
     { icon: Users, text: "Founders Community" },
     { icon: Video, text: "Monthly Strategy Calls" },
 ];
 
-// Countdown Timer Hook
-const useCountdown = (hours: number) => {
-    const getInitialTime = () => {
-        const saved = localStorage.getItem('gol_countdown_end');
-        if (saved) {
-            const endTime = parseInt(saved, 10);
-            const remaining = endTime - Date.now();
-            if (remaining > 0) {
-                return remaining;
-            }
-        }
-        // Set new countdown
-        const endTime = Date.now() + hours * 60 * 60 * 1000;
-        localStorage.setItem('gol_countdown_end', endTime.toString());
-        return hours * 60 * 60 * 1000;
-    };
-
-    const [timeLeft, setTimeLeft] = useState(getInitialTime());
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setTimeLeft(prev => {
-                if (prev <= 1000) {
-                    // Reset timer when it reaches 0
-                    const endTime = Date.now() + hours * 60 * 60 * 1000;
-                    localStorage.setItem('gol_countdown_end', endTime.toString());
-                    return hours * 60 * 60 * 1000;
-                }
-                return prev - 1000;
-            });
-        }, 1000);
-
-        return () => clearInterval(timer);
-    }, [hours]);
-
-    const hours_left = Math.floor(timeLeft / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    return { hours: hours_left, minutes, seconds };
-};
-
 export const FinalCTASection = () => {
-    const countdown = useCountdown(4);
+    const { hours, minutes, seconds, isExpired, checkoutUrl } = useCountdown();
 
     return (
         <section className="relative py-12 md:py-16 px-6">
@@ -76,55 +34,76 @@ export const FinalCTASection = () => {
                     {/* Content */}
                     <div className="text-center pt-4">
                         {/* Countdown Timer */}
-                        <div className="flex items-center justify-center gap-2 mb-4">
-                            <Clock className="w-5 h-5 text-red-500" />
-                            <span className="font-mono text-sm text-red-500">Offer expires in:</span>
-                        </div>
-                        <div className="flex items-center justify-center gap-3 mb-6">
-                            <div className="bg-[#1a1a1a] border border-red-500/30 rounded-lg px-4 py-2">
-                                <span className="text-2xl md:text-3xl font-mono font-bold text-white">
-                                    {String(countdown.hours).padStart(2, '0')}
-                                </span>
-                                <span className="block text-xs text-gray-500 font-mono">HRS</span>
-                            </div>
-                            <span className="text-2xl text-red-500 font-bold">:</span>
-                            <div className="bg-[#1a1a1a] border border-red-500/30 rounded-lg px-4 py-2">
-                                <span className="text-2xl md:text-3xl font-mono font-bold text-white">
-                                    {String(countdown.minutes).padStart(2, '0')}
-                                </span>
-                                <span className="block text-xs text-gray-500 font-mono">MIN</span>
-                            </div>
-                            <span className="text-2xl text-red-500 font-bold">:</span>
-                            <div className="bg-[#1a1a1a] border border-red-500/30 rounded-lg px-4 py-2">
-                                <span className="text-2xl md:text-3xl font-mono font-bold text-white">
-                                    {String(countdown.seconds).padStart(2, '0')}
-                                </span>
-                                <span className="block text-xs text-gray-500 font-mono">SEC</span>
-                            </div>
-                        </div>
+                        {!isExpired ? (
+                            <>
+                                <div className="flex items-center justify-center gap-2 mb-4">
+                                    <Clock className="w-5 h-5 text-red-500" />
+                                    <span className="font-mono text-sm text-red-500">Offer expires in:</span>
+                                </div>
+                                <div className="flex items-center justify-center gap-3 mb-6">
+                                    <div className="bg-[#1a1a1a] border border-red-500/30 rounded-lg px-4 py-2">
+                                        <span className="text-2xl md:text-3xl font-mono font-bold text-white">
+                                            {String(hours).padStart(2, '0')}
+                                        </span>
+                                        <span className="block text-xs text-gray-500 font-mono">HRS</span>
+                                    </div>
+                                    <span className="text-2xl text-red-500 font-bold">:</span>
+                                    <div className="bg-[#1a1a1a] border border-red-500/30 rounded-lg px-4 py-2">
+                                        <span className="text-2xl md:text-3xl font-mono font-bold text-white">
+                                            {String(minutes).padStart(2, '0')}
+                                        </span>
+                                        <span className="block text-xs text-gray-500 font-mono">MIN</span>
+                                    </div>
+                                    <span className="text-2xl text-red-500 font-bold">:</span>
+                                    <div className="bg-[#1a1a1a] border border-red-500/30 rounded-lg px-4 py-2">
+                                        <span className="text-2xl md:text-3xl font-mono font-bold text-white">
+                                            {String(seconds).padStart(2, '0')}
+                                        </span>
+                                        <span className="block text-xs text-gray-500 font-mono">SEC</span>
+                                    </div>
+                                </div>
 
-                        {/* Subtitle */}
-                        <p className="text-gray-400 text-sm md:text-base mb-6 font-sans">
-                            Limited time founder pricing.
-                            <br />
-                            <span className="text-amber-500 font-semibold">Save $30 before the timer runs out.</span>
-                        </p>
+                                {/* Subtitle for discount */}
+                                <p className="text-gray-400 text-sm md:text-base mb-6 font-sans">
+                                    Limited time founder pricing.
+                                    <br />
+                                    <span className="text-amber-500 font-semibold">Save $30 before the timer runs out.</span>
+                                </p>
 
-                        {/* Price */}
-                        <div className="mb-6">
-                            <div className="flex items-center justify-center gap-3">
-                                <span className="text-2xl text-gray-500 line-through font-mono">$97</span>
-                                <span className="text-5xl md:text-6xl font-mono font-bold text-white">
-                                    $67
-                                </span>
-                                <span className="px-2 py-1 bg-red-600 text-white text-xs font-mono font-bold rounded">
-                                    -30%
-                                </span>
-                            </div>
-                            <div className="text-amber-500 font-mono text-sm tracking-wider mt-2">
-                                LIFETIME ACCESS
-                            </div>
-                        </div>
+                                {/* Price with discount */}
+                                <div className="mb-6">
+                                    <div className="flex items-center justify-center gap-3">
+                                        <span className="text-2xl text-gray-500 line-through font-mono">$97</span>
+                                        <span className="text-5xl md:text-6xl font-mono font-bold text-white">
+                                            $67
+                                        </span>
+                                        <span className="px-2 py-1 bg-red-600 text-white text-xs font-mono font-bold rounded">
+                                            -30%
+                                        </span>
+                                    </div>
+                                    <div className="text-amber-500 font-mono text-sm tracking-wider mt-2">
+                                        LIFETIME ACCESS
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                {/* Expired state */}
+                                <p className="text-gray-400 text-sm md:text-base mb-6 font-sans">
+                                    The discount has expired, but you can still get lifetime access.
+                                </p>
+
+                                {/* Price without discount */}
+                                <div className="mb-6">
+                                    <span className="text-5xl md:text-6xl font-mono font-bold text-white">
+                                        $97
+                                    </span>
+                                    <div className="text-amber-500 font-mono text-sm tracking-wider mt-2">
+                                        LIFETIME ACCESS
+                                    </div>
+                                </div>
+                            </>
+                        )}
 
                         {/* Bonuses */}
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
@@ -141,14 +120,14 @@ export const FinalCTASection = () => {
                             ))}
                         </div>
 
-                        {/* CTA Button */}
-                        <Link to="/checkout?price=67">
+                        {/* CTA Button - Dynamic URL */}
+                        <Link to={checkoutUrl}>
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="w-full py-5 bg-amber-500 hover:bg-amber-400 text-black font-mono font-bold text-base md:text-lg tracking-wider rounded-xl transition-all duration-300 shadow-[0_0_40px_rgba(255,184,0,0.4)] hover:shadow-[0_0_60px_rgba(255,184,0,0.6)]"
                             >
-                                CLAIM $67 LIFETIME ACCESS
+                                {isExpired ? 'CLAIM $97 LIFETIME ACCESS' : 'CLAIM $67 LIFETIME ACCESS'}
                             </motion.button>
                         </Link>
 
