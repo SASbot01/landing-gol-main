@@ -2,12 +2,11 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 const terminalLines = [
-    { text: "$ get your login, configure your areas and start operate like a pro", type: "command" },
-    { text: "> Syncing Bio-Dome (Health)... [OK]", type: "success" },
-    { text: "> Encrypting The Vault (Finance)... [OK]", type: "success" },
-    { text: "> Loading Ops Center... [OK]", type: "success" },
-    { text: "> SYSTEM STATUS: START THE GAME OF LIFE", type: "highlight" },
-    { text: "> You are now in control.", type: "final" },
+    { text: "$ init account --optimize-performance=100%", type: "command" },
+    { text: "> Organizing Business & Ops... [OK]", type: "success" },
+    { text: "> Optimizing Health Protocols... [OK]", type: "success" },
+    { text: "> Structuring Net Worth... [SECURE]", type: "success" },
+    { text: "> SYSTEM STATUS: 100% PERFORMANCE ACHIEVED", type: "highlight" },
 ];
 
 const getLineColor = (type: string) => {
