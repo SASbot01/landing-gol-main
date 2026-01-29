@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useCountdown } from "@/hooks/useCountdown";
-import { Play } from "lucide-react";
 
 export const HeroSection = () => {
     const [isHovered, setIsHovered] = useState(false);
@@ -71,36 +70,22 @@ export const HeroSection = () => {
                     <span className="text-white">execute strategy</span>.
                 </motion.p>
 
-                {/* CTA Buttons */}
+                {/* CTA Button */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.6 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                    className="flex items-center justify-center"
                 >
-                    {/* Primary CTA - Watch VSL */}
-                    <Link to="/walkthrough">
+                    {/* Primary CTA - Dynamic URL based on countdown */}
+                    <Link to={checkoutUrl}>
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className="group relative px-10 py-4 bg-amber-500 hover:bg-amber-400 text-black font-mono font-semibold text-sm tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_30px_rgba(255,184,0,0.3)] hover:shadow-[0_0_40px_rgba(255,184,0,0.5)]"
                         >
                             <span className="flex items-center gap-2">
-                                <Play className="w-4 h-4 fill-black" />
-                                WATCH THE BRIEFING
-                            </span>
-                        </motion.button>
-                    </Link>
-
-                    {/* Secondary CTA - Go to checkout */}
-                    <Link to={checkoutUrl}>
-                        <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="group relative px-10 py-4 bg-transparent hover:bg-amber-500/10 text-amber-500 border border-amber-500/50 hover:border-amber-500 font-mono font-semibold text-sm tracking-wider rounded-lg transition-all duration-300"
-                        >
-                            <span className="flex items-center gap-2">
-                                <span className="text-amber-500">&gt;</span>
+                                <span className="text-amber-900">&gt;</span>
                                 INITIALIZE PROTOCOL
                             </span>
                         </motion.button>
