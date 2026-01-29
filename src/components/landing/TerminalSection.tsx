@@ -80,7 +80,7 @@ export const TerminalSection = () => {
                     </div>
 
                     {/* Terminal Body */}
-                    <div className="terminal-body min-h-[280px]">
+                    <div className="terminal-body min-h-[180px]">
                         {terminalLines.slice(0, visibleLines).map((line, index) => (
                             <motion.div
                                 key={index}
