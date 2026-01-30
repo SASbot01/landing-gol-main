@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/landing/HeroSection";
+import { Roadmap } from "@/components/landing/Roadmap";
 import { SocialProofSection } from "@/components/landing/SocialProofSection";
 import { TerminalSection } from "@/components/landing/TerminalSection";
 import { BentoGrid } from "@/components/landing/BentoGrid";
@@ -36,6 +37,7 @@ export default function Landing() {
             {/* Main Content */}
             <main>
                 <HeroSection />
+                <Roadmap />
                 <SocialProofSection />
                 <TerminalSection />
                 <BentoGrid />

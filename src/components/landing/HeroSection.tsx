@@ -37,7 +37,7 @@ export const HeroSection = () => {
                             className="w-20 h-20 md:w-24 md:h-24 relative z-10 cursor-pointer"
                             animate={{ rotate: 360 }}
                             transition={{
-                                duration: isHovered ? 5 : 20, // 4x faster on hover (20/4 = 5)
+                                duration: isHovered ? 5 : 20,
                                 repeat: Infinity,
                                 ease: "linear"
                             }}
@@ -50,12 +50,13 @@ export const HeroSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.6 }}
-                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold tracking-tight mb-6 leading-[1.1]"
+                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold tracking-tight mb-4 leading-[1.1]"
                 >
-                    <span className="text-white">THE OPERATING SYSTEM</span>
+                    <span className="text-white">Grow in the </span>
+                    <span className="text-amber-glow">Game</span>
                     <br />
-                    <span className="text-white">FOR YOUR </span>
-                    <span className="text-amber-glow">REALITY</span>
+                    <span className="text-gray-400 text-3xl md:text-4xl lg:text-5xl">See results in </span>
+                    <span className="text-amber-glow text-3xl md:text-4xl lg:text-5xl">Real Life</span>
                 </motion.h1>
 
                 {/* Subheadline */}
@@ -63,12 +64,19 @@ export const HeroSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.6 }}
-                    className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 font-sans leading-relaxed"
+                    className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-6 font-sans leading-relaxed"
                 >
-                    Transcend the assisted chaos. A tactical framework designed to{" "}
-                    <span className="text-white">defend wealth</span>,{" "}
-                    <span className="text-white">command biology</span>, and{" "}
-                    <span className="text-white">execute strategy</span>.
+                    In a game everything is recorded, so you seek progress; in life, if you don't measure your most important aspects, you enter a loop without knowing what is happening.
+                </motion.p>
+
+                {/* Second Headline */}
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25, duration: 0.6 }}
+                    className="text-sm md:text-base text-gray-500 max-w-xl mx-auto mb-10 font-mono leading-relaxed"
+                >
+                    Turn your chaos and fragmentation into order and control to transform your life without setting Notions or spreadsheets that break.
                 </motion.p>
 
                 {/* CTA Buttons */}
@@ -78,30 +86,29 @@ export const HeroSection = () => {
                     transition={{ delay: 0.3, duration: 0.6 }}
                     className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
-                    {/* Primary CTA - Watch VSL */}
-                    <Link to="/walkthrough">
+                    {/* Primary CTA - Access Now */}
+                    <Link to={checkoutUrl}>
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className="group relative px-10 py-4 bg-amber-500 hover:bg-amber-400 text-black font-mono font-semibold text-sm tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_30px_rgba(255,184,0,0.3)] hover:shadow-[0_0_40px_rgba(255,184,0,0.5)]"
                         >
                             <span className="flex items-center gap-2">
-                                <Play className="w-4 h-4 fill-black" />
-                                WATCH THE BRIEFING
+                                ACCESS NOW
                             </span>
                         </motion.button>
                     </Link>
 
-                    {/* Secondary CTA - Go to checkout */}
-                    <Link to={checkoutUrl}>
+                    {/* Secondary CTA - Watch Briefing */}
+                    <Link to="/walkthrough">
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className="group relative px-10 py-4 bg-transparent hover:bg-amber-500/10 text-amber-500 border border-amber-500/50 hover:border-amber-500 font-mono font-semibold text-sm tracking-wider rounded-lg transition-all duration-300"
                         >
                             <span className="flex items-center gap-2">
-                                <span className="text-amber-500">&gt;</span>
-                                INITIALIZE PROTOCOL
+                                <Play className="w-4 h-4" />
+                                WATCH BRIEFING
                             </span>
                         </motion.button>
                     </Link>
@@ -113,7 +120,7 @@ export const HeroSection = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 0.5 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2"
+                className="absolute bottom-4 left-1/2 -translate-x-1/2"
             >
                 <motion.div
                     animate={{ y: [0, 8, 0] }}
